@@ -20,13 +20,21 @@ This is structured for direct paste into Linear's issue-creation workflow or CSV
 
 ## 2. Team & capacity
 
-| Role | Count | Tag | Primary scope |
-|---|---|---|---|
-| Backend Engineer (Java 26 / Spring Boot 4) | 2 | `BE1`, `BE2` | Transaction, rules, fraud engine, case mgmt, Kafka, security |
-| ML Engineer (Python) | 1 | `ML` | ML service, feature store, training, drift, MLflow |
-| DevOps Engineer | 1 | `DO` | Docker, K8s, Helm, CI/CD, observability, secrets |
-| Frontend Engineer | 1 | `FE` | Analyst console, dashboards, case UI |
-| QA Engineer | 1 | `QA` | Test strategy, automation, contract/perf/security tests |
+| Role                                       | Count | Tag          |
+|--------------------------------------------|-------|--------------|
+| Backend Engineer (Java 26 / Spring Boot 4) | 2     | `BE1`, `BE2` |
+| ML Engineer (Python)                       | 1     | `ML`         |
+| DevOps Engineer                            | 1     | `DO`         |
+| Frontend Engineer                          | 1     | `FE`         |
+| QA Engineer                                | 1     | `QA`         |
+
+| Primary scope                                                |
+|--------------------------------------------------------------|
+| Transaction, rules, fraud engine, case mgmt, Kafka, security |
+| ML service, feature store, training, drift, MLflow           |
+| Docker, K8s, Helm, CI/CD, observability, secrets             |
+| Analyst console, dashboards, case UI                         |
+| Test strategy, automation, contract/perf/security tests      |
 
 **Cadence:** 2-week sprints. Capacity assumes ~8 effective story-points per engineer per sprint. The ML track runs partly in parallel with backend foundation work (data + feature engineering can begin once the transaction schema is frozen).
 
@@ -34,13 +42,13 @@ This is structured for direct paste into Linear's issue-creation workflow or CSV
 
 ## 3. Estimation scale (Estimated Complexity)
 
-| Size | Meaning | Rough effort |
-|---|---|---|
-| XS | Trivial, well-understood | < 0.5 day |
-| S | Small, isolated change | 0.5–1 day |
-| M | Moderate, some integration | 2–3 days |
-| L | Large, multi-component | 4–6 days |
-| XL | Very large, cross-cutting (consider splitting) | 1.5–2+ weeks |
+| Size | Meaning                                        | Rough effort |
+|------|------------------------------------------------|--------------|
+| XS   | Trivial, well-understood                       | < 0.5 day    |
+| S    | Small, isolated change                         | 0.5–1 day    |
+| M    | Moderate, some integration                     | 2–3 days     |
+| L    | Large, multi-component                         | 4–6 days     |
+| XL   | Very large, cross-cutting (consider splitting) | 1.5–2+ weeks |
 
 ---
 
@@ -57,71 +65,129 @@ This is structured for direct paste into Linear's issue-creation workflow or CSV
 
 ## 5. Milestones
 
-| Milestone | Target | Exit criteria |
-|---|---|---|
-| **M0 — Bootstrap** | End Sprint 1 | Monorepo, build system, CI skeleton, local Docker Compose stack runs |
-| **M1 — Foundation complete** | End Sprint 2 | Domain model + migrations, JWT/RBAC, all core entities persisted |
-| **M2 — Transactions + Rules MVP** | End Sprint 4 | Transactions ingested & persisted, events published, rules engine scoring |
-| **M3 — Real-time scoring MVP** | End Sprint 7 | End-to-end ML + rules risk decision on live transactions, explainability stub |
-| **M4 — Case management live** | End Sprint 8 | Cases auto-created from high-risk scores, analyst assign/review workflow |
-| **M5 — Closed-loop learning** | End Sprint 9 | Analyst feedback ingested, retraining triggered, drift monitored |
-| **M6 — Observability & security hardened** | End Sprint 10 | Dashboards, alerting, full audit trail, secrets management, scans in CI |
-| **M7 — Production readiness / GA** | End Sprint 12 | K8s + Helm deploy, full test matrix, load-tested to target TPS, backups |
-| **M8 — Advanced intelligence** | Post-GA | Graph detection, SHAP/LIME, Flink streaming, multi-region/tenant |
+| Milestone                              | Target        |
+|----------------------------------------|---------------|
+| M0 — Bootstrap                         | End Sprint 1  |
+| M1 — Foundation complete               | End Sprint 2  |
+| M2 — Transactions + Rules MVP          | End Sprint 4  |
+| M3 — Real-time scoring MVP             | End Sprint 7  |
+| M4 — Case management live              | End Sprint 8  |
+| M5 — Closed-loop learning              | End Sprint 9  |
+| M6 — Observability & security hardened | End Sprint 10 |
+| M7 — Production readiness / GA         | End Sprint 12 |
+| M8 — Advanced intelligence             | Post-GA       |
+
+### Milestone Exit Criteria
+
+| Exit Criteria                                                        |
+|----------------------------------------------------------------------|
+| Monorepo, build system, CI skeleton, local Docker Compose stack runs |
+| Domain model, migrations, JWT/RBAC, core entities persisted          |
+| Transactions ingested, persisted, events published, rules scoring    |
+| ML + rules risk decision on live transactions, explainability stub   |
+| Cases auto-created, analyst assignment and review workflow           |
+| Feedback ingested, retraining triggered, drift monitored             |
+| Dashboards, alerting, audit trail, secrets management, scans         |
+| K8s + Helm, test matrix, load testing, backups                       |
+| Graph detection, SHAP/LIME, Flink, multi-region/tenant               |
 
 ---
 
-## 6. Suggested sprint allocation
+## 6. Suggested Sprint Allocation
 
-| Sprint | Focus | Lead tracks |
-|---|---|---|
-| 1 | Phase 1 — scaffolding, build, local infra | DO + BE |
-| 2 | Phase 1 — domain model, security; ML data spike begins | BE + ML |
-| 3 | Phase 2 — transaction processing, Kafka backbone | BE + DO |
-| 4 | Phase 2 — rules engine, fraud decision skeleton | BE + ML |
-| 5 | Phase 2 finish + Phase 3 — ML service foundation | BE + ML |
-| 6 | Phase 3 — feature store, training pipeline | ML + BE |
-| 7 | Phase 3 — model lifecycle, registry, scoring integration | ML + BE |
-| 8 | Phase 4 — case management + analyst console | BE + FE |
-| 9 | Phase 5 — feedback loop, active learning, drift | ML + BE |
-| 10 | Phase 6 — observability + security hardening | DO + BE |
-| 11 | Phase 7 — K8s/Helm, CI/CD quality gates | DO + QA |
-| 12 | Phase 7 — full test matrix, perf/load, backup, GA hardening | QA + all |
-| 13+ | Phase 8 — advanced intelligence (rolling backlog) | ML + BE |
+| Sprint | Focus                                            |
+|--------|--------------------------------------------------|
+| 1      | Phase 1 — scaffolding, build, local infra        |
+| 2      | Phase 1 — domain model, security                 |
+| 3      | Phase 2 — transaction processing, Kafka backbone |
+| 4      | Phase 2 — rules engine, fraud decision skeleton  |
+| 5      | Phase 2 finish + ML service foundation           |
+| 6      | Feature store and training pipeline              |
+| 7      | Model lifecycle and scoring integration          |
+| 8      | Case management and analyst console              |
+| 9      | Feedback loop, active learning, drift            |
+| 10     | Observability and security hardening             |
+| 11     | K8s/Helm and CI/CD quality gates                 |
+| 12     | Test matrix, performance, backup, GA hardening   |
+| 13+    | Advanced intelligence backlog                    |
 
-> QA and observability work are **continuous** from Sprint 3 onward, not a single late phase. The Phase 6/7 blocks are where they are *finalized and gated*, not where they start.
+### Sprint Ownership
 
----
+| Sprint | Lead Tracks |
+|--------|-------------|
+| 1      | DO + BE     |
+| 2      | BE + ML     |
+| 3      | BE + DO     |
+| 4      | BE + ML     |
+| 5      | BE + ML     |
+| 6      | ML + BE     |
+| 7      | ML + BE     |
+| 8      | BE + FE     |
+| 9      | ML + BE     |
+| 10     | DO + BE     |
+| 11     | DO + QA     |
+| 12     | QA + All    |
+| 13+    | ML + BE     |
 
-## 7. Epic catalog (all epics)
-
-| Epic | Title | Phase | Lead | Depends on |
-|---|---|---|---|---|
-| EPIC-01 | Project Scaffolding & Build System | 1 | DO/BE | — |
-| EPIC-02 | Local Dev Environment & Core Infrastructure | 1 | DO | EPIC-01 |
-| EPIC-03 | Domain Model & Persistence | 1 | BE | EPIC-01, EPIC-02 |
-| EPIC-04 | Security Foundation (AuthN/AuthZ) | 1 | BE | EPIC-03 |
-| EPIC-05 | Transaction Processing Service | 2 | BE | EPIC-03, EPIC-04 |
-| EPIC-06 | Event Streaming Backbone (Kafka) | 2 | BE/DO | EPIC-02, EPIC-05 |
-| EPIC-07 | Rules Engine | 2 | BE | EPIC-05, EPIC-06 |
-| EPIC-08 | Fraud Detection Engine (orchestration) | 2 | BE | EPIC-06, EPIC-07 |
-| EPIC-09 | ML Service Foundation (FastAPI) | 3 | ML | EPIC-01 |
-| EPIC-10 | ML Data & Feature Engineering | 3 | ML | EPIC-03, EPIC-09 |
-| EPIC-11 | Model Training & Evaluation Pipeline | 3 | ML | EPIC-10 |
-| EPIC-12 | Model Lifecycle & Registry | 3 | ML/BE | EPIC-11 |
-| EPIC-13 | Fraud Engine ↔ ML Scoring Integration | 3 | BE/ML | EPIC-08, EPIC-09, EPIC-12 |
-| EPIC-14 | Case Management Service | 4 | BE | EPIC-08 |
-| EPIC-15 | Analyst Console (Frontend) | 4 | FE | EPIC-14, EPIC-04 |
-| EPIC-16 | Human-in-the-Loop Feedback | 5 | BE/ML | EPIC-14 |
-| EPIC-17 | Active Learning & Review Prioritization | 5 | ML | EPIC-13, EPIC-16 |
-| EPIC-18 | Drift Detection & Retraining Orchestration | 5 | ML | EPIC-11, EPIC-16 |
-| EPIC-19 | Observability & Operations | 6 | DO | EPIC-06, EPIC-08 |
-| EPIC-20 | Security Hardening & Audit | 6 | BE/DO | EPIC-04 |
-| EPIC-21 | Kubernetes & Helm Deployment | 7 | DO | EPIC-02, EPIC-19 |
-| EPIC-22 | CI/CD, Testing & Quality Gates | 7 | QA/DO | EPIC-01 |
-| EPIC-23 | Advanced Intelligence (Future Roadmap) | 8 | ML/BE | GA (M7) |
+> QA and observability work are continuous from Sprint 3 onward.
 
 ---
+
+## 7. Epic Catalog
+
+| Epic    | Title                                  |
+|---------|----------------------------------------|
+| EPIC-01 | Project Scaffolding & Build System     |
+| EPIC-02 | Local Dev Environment & Infrastructure |
+| EPIC-03 | Domain Model & Persistence             |
+| EPIC-04 | Security Foundation (AuthN/AuthZ)      |
+| EPIC-05 | Transaction Processing Service         |
+| EPIC-06 | Event Streaming Backbone (Kafka)       |
+| EPIC-07 | Rules Engine                           |
+| EPIC-08 | Fraud Detection Engine                 |
+| EPIC-09 | ML Service Foundation                  |
+| EPIC-10 | ML Data & Feature Engineering          |
+| EPIC-11 | Model Training & Evaluation Pipeline   |
+| EPIC-12 | Model Lifecycle & Registry             |
+| EPIC-13 | Fraud Engine ↔ ML Integration          |
+| EPIC-14 | Case Management Service                |
+| EPIC-15 | Analyst Console                        |
+| EPIC-16 | Human-in-the-Loop Feedback             |
+| EPIC-17 | Active Learning                        |
+| EPIC-18 | Drift Detection & Retraining           |
+| EPIC-19 | Observability & Operations             |
+| EPIC-20 | Security Hardening & Audit             |
+| EPIC-21 | Kubernetes & Helm Deployment           |
+| EPIC-22 | CI/CD, Testing & Quality Gates         |
+| EPIC-23 | Advanced Intelligence                  |
+
+### Epic Details
+
+| Epic    | Phase | Lead  | Depends On                |
+|---------|-------|-------|---------------------------|
+| EPIC-01 | 1     | DO/BE | —                         |
+| EPIC-02 | 1     | DO    | EPIC-01                   |
+| EPIC-03 | 1     | BE    | EPIC-01, EPIC-02          |
+| EPIC-04 | 1     | BE    | EPIC-03                   |
+| EPIC-05 | 2     | BE    | EPIC-03, EPIC-04          |
+| EPIC-06 | 2     | BE/DO | EPIC-02, EPIC-05          |
+| EPIC-07 | 2     | BE    | EPIC-05, EPIC-06          |
+| EPIC-08 | 2     | BE    | EPIC-06, EPIC-07          |
+| EPIC-09 | 3     | ML    | EPIC-01                   |
+| EPIC-10 | 3     | ML    | EPIC-03, EPIC-09          |
+| EPIC-11 | 3     | ML    | EPIC-10                   |
+| EPIC-12 | 3     | ML/BE | EPIC-11                   |
+| EPIC-13 | 3     | BE/ML | EPIC-08, EPIC-09, EPIC-12 |
+| EPIC-14 | 4     | BE    | EPIC-08                   |
+| EPIC-15 | 4     | FE    | EPIC-14, EPIC-04          |
+| EPIC-16 | 5     | BE/ML | EPIC-14                   |
+| EPIC-17 | 5     | ML    | EPIC-13, EPIC-16          |
+| EPIC-18 | 5     | ML    | EPIC-11, EPIC-16          |
+| EPIC-19 | 6     | DO    | EPIC-06, EPIC-08          |
+| EPIC-20 | 6     | BE/DO | EPIC-04                   |
+| EPIC-21 | 7     | DO    | EPIC-02, EPIC-19          |
+| EPIC-22 | 7     | QA/DO | EPIC-01                   |
+| EPIC-23 | 8     | ML/BE | M7 (GA)                   |
 
 ## 8. Epic dependency graph
 
