@@ -1,3 +1,188 @@
 /.DS_Store
 /.vscode
 /frauddetection.zip
+
+# ============================================================
+# Fraud Prevention Platform — com.bragdev.frauddetection
+# Monorepo: Java/Spring Boot (Gradle KDSL) + Python ML service
+#           + Node analyst console + Docker/K8s/Helm
+# ============================================================
+
+# ----------------------------------------
+# Operating system
+# ----------------------------------------
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+Thumbs.db
+ehthumbs.db
+desktop.ini
+
+# ----------------------------------------
+# IDE / Editors
+# ----------------------------------------
+.idea/
+*.iml
+*.iws
+*.ipr
+.vscode/
+*.code-workspace
+.project
+.classpath
+.settings/
+.factorypath
+*.swp
+*~
+
+# ----------------------------------------
+# Java / Gradle (backend modules)
+#   - 'build/' (unanchored) covers root + every module
+#   - KEEP gradle/wrapper/gradle-wrapper.jar (do NOT add *.jar)
+# ----------------------------------------
+.gradle/
+build/
+!gradle/wrapper/gradle-wrapper.jar
+!gradle/wrapper/gradle-wrapper.properties
+out/
+bin/
+*.class
+hs_err_pid*
+replay_pid*
+.kotlin/
+
+# ----------------------------------------
+# Spring Boot
+#   App config (application*.yml/properties) is committed.
+#   Secrets come from env / secret store, NOT from files (see below).
+# ----------------------------------------
+spring-boot-*.log
+
+# ----------------------------------------
+# Python / ML service (FastAPI)
+#   Lockfiles (poetry.lock / uv.lock / requirements.txt) ARE committed.
+# ----------------------------------------
+__pycache__/
+*.py[cod]
+*$py.class
+.venv/
+venv/
+env/
+.env.venv/
+*.egg-info/
+.eggs/
+.installed.cfg
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.pytype/
+.ipynb_checkpoints/
+.python-version
+
+# ----------------------------------------
+# ML artifacts / MLflow / data
+#   Tracked experiments & artifacts are local; the registry is the source of truth.
+#   Commit small fixtures explicitly with: git add -f path/to/fixture
+# ----------------------------------------
+mlruns/
+mlartifacts/
+mlflow.db
+artifacts/
+models/local/
+*.pkl
+*.joblib
+*.onnx
+*.bst
+*.ubj
+*.h5
+
+# Local datasets / feature dumps (keep folder structure via .gitkeep)
+/data/
+**/data/raw/
+**/data/interim/
+**/data/processed/
+*.parquet
+*.feather
+# (CSVs are NOT globally ignored — small reference/seed CSVs are often committed.
+#  Add large local extracts to data/ above, or ignore specific files as needed.)
+
+# ----------------------------------------
+# Node / Frontend (analyst console)
+# ----------------------------------------
+node_modules/
+dist/
+.vite/
+.cache/
+.parcel-cache/
+.eslintcache
+*.local
+coverage/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+.pnpm-store/
+
+# ----------------------------------------
+# Docker
+#   Commit docker-compose.yml + .env.example; keep local overrides out.
+# ----------------------------------------
+docker-compose.override.yml
+docker-compose.*.local.yml
+
+# ----------------------------------------
+# Kubernetes / Helm
+#   Commit charts, Chart.yaml, Chart.lock, and *.example values.
+#   Keep packaged charts, fetched subcharts, and rendered secrets out.
+# ----------------------------------------
+*.tgz
+**/charts/*.tgz
+helm-debug.yaml
+*.rendered.yaml
+*.dec.yaml
+secrets.*.yaml
+*-secret.local.yaml
+
+# ----------------------------------------
+# Secrets / env / credentials / certs
+#   Nothing sensitive in the repo — sourced at runtime from the secret store.
+# ----------------------------------------
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+*.p12
+*.pfx
+*.jks
+*.keystore
+*.truststore
+service-account*.json
+gcp-*.json
+aws-credentials*
+secrets/
+
+# ----------------------------------------
+# Logs / temp / coverage reports
+# ----------------------------------------
+*.log
+logs/
+tmp/
+temp/
+*.tmp
+*.pid
+.coverage
+coverage.xml
+htmlcov/
+*.lcov
+.allure/
+allure-results/
+test-results/
+
+# ----------------------------------------
+# Misc
+# ----------------------------------------
+*.bak
+*.orig
+.history/
